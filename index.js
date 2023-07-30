@@ -1,6 +1,6 @@
 const mockText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 const mockUrl = "https://google.com";
-
+const mockEmail = 'example@example.com'
 const buildLink = (url, params) => {
     let inputUrl = new URL(url);
     let inputParams = inputUrl.searchParams;
@@ -37,12 +37,25 @@ const buildFbLink = (url) => {
     })
 }
 
+
+const buildEmailLink = (to, text) => {
+    return buildLink('mailto:' + to, {
+        display: 'popup',
+        body: text
+    })
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const longTextTextarea = document.getElementById('textarea')
     longTextTextarea.innerText = mockText;
 
     const urlInput = document.getElementById('url');
     urlInput.value = mockUrl;
+
+    const emailInput = document.getElementById('demoEmail');
+    emailInput.value = mockEmail;
 
     document.getElementById('shareTelegram').addEventListener('click', () => {
         window.open(buildTelegramLink(urlInput.value, longTextTextarea.value));
@@ -60,4 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(buildFbLink(urlInput.value));
     });
 
+    document.getElementById('shareEmail').addEventListener('click', () => {
+        window.open(buildEmailLink(emailInput.value, longTextTextarea.value));
+    });
 });
