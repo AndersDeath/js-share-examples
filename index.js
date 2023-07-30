@@ -19,7 +19,15 @@ const buildTelegramLink = (url, text) => {
 }
 
 const buildWhatsappLink = (text) => {
-    return `https://wa.me?text=${text}`
+    return buildLink('https://wa.me', {
+        text
+    });
+}
+
+const buildTwitterLink = (text) => {
+    return buildLink('https://twitter.com/intent/tweet', {
+        text
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -35,6 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('shareWhatsapp').addEventListener('click', () => {
         window.open(buildWhatsappLink(longTextTextarea.value));
+    });
+
+    document.getElementById('shareTwitter').addEventListener('click', () => {
+        window.open(buildTwitterLink(longTextTextarea.value));
     });
 
 });
