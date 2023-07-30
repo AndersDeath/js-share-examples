@@ -1,13 +1,21 @@
 const mockText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 const mockUrl = "https://google.com";
 
-const buildTelegramLink = (url, text) => {
-    let inputUrl = new URL('https://t.me/share/url');
+const buildLink = (url, params) => {
+    let inputUrl = new URL(url);
     let inputParams = inputUrl.searchParams;
-    inputParams.set('url', url || '');
-    inputParams.set('text', text);
+    Object.entries(params).forEach((value) => {
+        inputParams.set(value[0], value[1]);
+    })
     inputUrl.search = inputParams.toString();
     return inputUrl.toString();
+}
+
+const buildTelegramLink = (url, text) => {
+    return buildLink('https://t.me/share/url', {
+        url: url || '',
+        text
+    });
 }
 
 const buildWhatsappLink = (text) => {
