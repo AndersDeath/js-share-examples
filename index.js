@@ -5,6 +5,10 @@ const buildTelegramLink = (url, text) => {
     return `https://t.me/share/url?url=${url}&text=${text}`;
 }
 
+const buildWhatsappLink = (text) => {
+    return `https://wa.me?text=${text}`
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const longTextTextarea = document.getElementById('textarea')
     longTextTextarea.innerText = mockText;
@@ -14,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('shareTelegram').addEventListener('click', () => {
         window.open(buildTelegramLink(urlInput.value, longTextTextarea.value));
+    });
+
+    document.getElementById('shareWhatsapp').addEventListener('click', () => {
+        window.open(buildWhatsappLink(longTextTextarea.value));
     });
 
 });
