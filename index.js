@@ -2,7 +2,12 @@ const mockText = "Lorem Ipsum is simply dummy text of the printing and typesetti
 const mockUrl = "https://google.com";
 
 const buildTelegramLink = (url, text) => {
-    return `https://t.me/share/url?url=${url}&text=${text}`;
+    let inputUrl = new URL('https://t.me/share/url');
+    let inputParams = inputUrl.searchParams;
+    inputParams.set('url', url || '');
+    inputParams.set('text', text);
+    inputUrl.search = inputParams.toString();
+    return inputUrl.toString();
 }
 
 const buildWhatsappLink = (text) => {
