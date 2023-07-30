@@ -30,6 +30,13 @@ const buildTwitterLink = (text) => {
     });
 }
 
+const buildFbLink = (url) => {
+    return buildLink('https://www.facebook.com/sharer/sharer.php', {
+        display: 'popup',
+        u: url
+    })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const longTextTextarea = document.getElementById('textarea')
     longTextTextarea.innerText = mockText;
@@ -47,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('shareTwitter').addEventListener('click', () => {
         window.open(buildTwitterLink(longTextTextarea.value));
+    });
+
+    document.getElementById('shareFB').addEventListener('click', () => {
+        window.open(buildFbLink(urlInput.value));
     });
 
 });
